@@ -70,4 +70,31 @@
     submenu: file
   }), 1);
 
+  $(document).ready(function() {
+    return $('#editor').bind('paste', function(event) {
+      var before;
+      before = $('#editor').html();
+      return setTimeout((function() {
+        var after, i, p1, p2, pasted, replace, replaced;
+        after = $('#editor').html();
+        p1 = -1;
+        p2 = -1;
+        i = 0;
+        while (i < after.length) {
+          if (p1 === -1 && before.substr(i, 1) !== after.substr(i, 1)) {
+            p1 = i;
+          }
+          if (p2 === -1 && before.substr(before.length - i - 1, 1) !== after.substr(before.length - i - 1, 1)) {
+            p2 = i;
+          }
+          i++;
+        }
+        pasted = after.substr(p1 - 1, after.length - p2 - p1 + 2);
+        replace = pasted.replace(/<[^>]+>/g, '');
+        replaced = after.substr(0, p1 - 1) + replace + after.substr(p1 - 1 + pasted.length);
+        return $('#editor').html(replaced);
+      }), 100);
+    });
+  });
+
 }).call(this);

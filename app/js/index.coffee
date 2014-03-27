@@ -43,3 +43,22 @@ file.append new gui.MenuItem(
 
 win.menu = menu
 win.menu.insert new gui.MenuItem({label: 'File', submenu: file}), 1
+
+$(document).ready ->
+  $('#editor').bind 'paste', (event) ->
+    before = $('#editor').html()
+    setTimeout (->
+      after = $('#editor').html()
+      p1 = -1
+      p2 = -1
+      i = 0
+      while i < after.length
+        if p1 == -1 and before.substr(i, 1) != after.substr(i, 1) then p1 = i
+        if p2 == -1 and before.substr(before.length-i-1, 1) != after.substr(before.length-i-1, 1)
+        then p2 = i
+        i++
+      pasted = after.substr p1-1, after.length-p2-p1+2
+      replace = pasted.replace /<[^>]+>/g, ''
+      replaced = after.substr(0, p1-1)+replace+after.substr(p1-1+pasted.length)
+      $('#editor').html replaced
+    ), 100
