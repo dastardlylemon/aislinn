@@ -1,9 +1,9 @@
 {
   "name": "aislinn",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "",
   "keywords": [],
-  
+
     "homepage": "https://github.com/dastardlylemon/aislinn",
     "bugs": "https://github.com/dastardlylemon/aislinn/issues",
     "author": {
@@ -15,7 +15,7 @@
       "type": "git",
       "url": "git://github.com/dastardlylemon/aislinn.git"
     },
-  
+
   "dependencies": {},
   "devDependencies": {
     "matchdep": "~0.1.2",
